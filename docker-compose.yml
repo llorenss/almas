@@ -4,8 +4,8 @@ services:
     restart: always
     volumes:
      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: postgres
+    env_file:
+      - src/.env   
     ports:
       - "5432:5432"
 
@@ -20,9 +20,8 @@ services:
   pgadmin:
     image: dpage/pgadmin4:latest
     restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: postgres
+    env_file:
+      - src/.env   
     ports:
       - "5050:80"
     volumes:
