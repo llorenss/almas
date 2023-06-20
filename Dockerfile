@@ -13,6 +13,9 @@ RUN poetry install
 
 COPY src ./
 
+COPY entrypoint.sh ./
+
+ENTRYPOINT ["./entrypoint.sh"]
 
 # FROM python:3.10-slim
 
