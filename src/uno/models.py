@@ -11,5 +11,5 @@ class Address(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
 
 class Friendship(models.Model):
-    user= models.ForeignKey(Person, on_delete=models.CASCADE)
-    friend= models.ForeignKey(Person, on_delete=models.CASCADE)
+    user = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="%(class)s_user")
+    friend = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="%(class)s_friend")
