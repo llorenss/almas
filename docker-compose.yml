@@ -12,11 +12,12 @@ services:
   django:
     build: .
     restart: always
-    command: ["python3", "manage.py", "runserver", "0:8000"]
-    ports:
-     - "8000:8000"
+    command: ["gunicorn", "config.wsgi", "-b", "0:8000", "--workers", "1"]
+    volumes:
+      - django_staticfiles:/app/staticfiles/  
     depends_on:
      - postgres
+     
   pgadmin:
     image: dpage/pgadmin4:latest
     restart: always
@@ -28,7 +29,19 @@ services:
       - pgadmin_data:/var/lib/pgadmin
       # слева внешний мир, справа мир контейнеров
 
+  nginx:
+    image: nginx:alpine
+    restart: always
+    volumes:
+      - django_staticfiles:/home/app/web/staticfiles/
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+    depends_on:
+      - django
 
 volumes:
   postgres_data:
   pgadmin_data:
+  django_staticfiles:
+
