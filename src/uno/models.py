@@ -13,3 +13,7 @@ class Address(models.Model):
 class Friendship(models.Model):
     user = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="%(class)s_user")
     friend = models.ForeignKey(Person, on_delete=models.CASCADE, related_name="%(class)s_friend")
+
+class Price(models.Model):
+    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    price = models.FloatField()
