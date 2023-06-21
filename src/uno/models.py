@@ -17,3 +17,7 @@ class Friendship(models.Model):
 class Price(models.Model):
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
     price = models.FloatField()
+
+class Car(models.Model):
+    brand = models.CharField(max_length=100)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE)
